@@ -1,0 +1,6 @@
+x canary
+x imperative fibonacci returns correct values at multiple positions given
+x functional fibonacci returns correct values at multiple positions given
+x recursive fibonacci returns correct values at multiple positions given
+x memoize fibonacci returns correct values at multiple positions given
+x confirm that memoize fibonacci is faster than recursive fibonacci

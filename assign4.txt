@@ -1,0 +1,98 @@
+Assign4: Due 11:59PM November 8
+
+The Fibonacci series of numbers start with 1, 1, 2, 3, 5, 8, 13, 21, ...
+where values at position 0 and 1 are 1, and values at each position after
+that are a sum of values at the previous two positions.
+
+Write four implementations of a function to compute the Fibonacci number at a given position.
+
+Please start with one implementation at a time rather than rushing through all
+of them at the same time.
+
+The four implementations are described below:
+
+1. An imperative iteration. 
+  Given a position n, loop through totaling values until you reach the value for the given position.
+
+2. A functional iteration.
+  Given a position n, loop through totaling values until you reach the value for the given position. Avoid explicit mutability.
+
+3. A simple recursion.
+  Given a position, compute the value at a position using the expression fib(n-1) + fib(n-2).
+
+4. A memoized recursion.
+  Given a position, look up to see if the value has been precomputed and if so return that value. Otherwise, use recursion to compute the value.
+  
+Confirms that the memoized version is faster than the recursive version.
+
+Reuse as much code as possible.
+
+Please bring forward the practices, techniques, and tools you have learned so far. This includes: 
+Good code quality
+Lightweight design
+Minimum code
+Automated testing                                                         
+Code coverage
+Continuous integration
+
+Once you complete coding, please answer the following:
+
+1. What design principles did you use in this assignment? Discuss.
+
+    In this assignment, we used SRP when designing each class and test file.
+Each class has a focus -- they each compute a fibonacci value at a specified
+position using a different approach, and each test file tests a separate class.
+We also made use of DRY when creating the memoized recursion method. We had
+MemoizationFibonacci extend RecursiveFibonacci so we could call the super class'
+evaluate method when inserting values into our hash map rather than repeating
+code we'd already written elsewhere. Finally, by having each class implement the
+interface Fibonacci and extending the method evaluate without changing the base
+code, each class can substitute for Fibonacci anywhere it is accepted. By doing
+doing this, we made use of OCP and LSP.
+
+2. Any surprises or things that you did not expect?
+
+    The main surprise came from the way we tested. We knew we were violating DRY
+by having the same tests in every test class, but we did not know how to fix
+this problem. It was surprising that we could use default methods for tests in
+an interface and in each subclass we could have an overriding function that
+returns a newly initiated class of type that needs to be tested.
+
+    Another surprise was the memoized recursion approach for calculating
+Fibonacci. It was interesting that using computeIfAbsent when attempting a
+functional style for the method yielded speedier results only sometimes even
+though we were still using a hash map as a cache. Using an imperative style by
+your recommendation gave us the results we needed when testing the speed of
+memoized versus recursion.
+
+3. What design patterns did you use in this assignment? Discuss.
+
+    To begin, we used a Factory Pattern by creating an interface that specified
+what position needed to be evaluated. We then created various implementations
+of Fibonacci using that interface. In addition to this, we also used a Compose
+Method Pattern by creating a default method, assertPositionIsValid, in our
+interface which throws an illegal argument exception when a position is less
+than zero. This default method can be called across all the classes that
+implement the interface in each "evaluate" method. We then used Cascade Method
+Pattern when creating the functional fibonacci "evaluate" method by chaining
+our stream to obtain a fibonacci sequence and having it return the correct
+fibonacci number in the end.
+
+    In our test classes, we again used Compose Method Pattern when creating the
+method "getTimeDeltaFromFibonacciTest" in our memoization fibonacci test class
+rather than violating DRY and writing those lines of code multiple times in the
+test. Then, we used Prototype Pattern to create our testing framework for each
+fibonacci test class. We started with an interface with default methods while
+leaving the creation of the object itself to each class' test file (ex.
+FunctionalFibonacciTest would create a Functional Fibonacci object to test with.
+
+Total [100]: 100
+All tests pass [10]:
+Test quality [10]:
+Code Coverage [10]:        
+Functional solution [10]:
+Memoized solution and reuse [20]:
+Design quality [10]:
+Code quality [10]:
+Performance test [10]:
+Response to questions [10]:
